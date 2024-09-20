@@ -1,0 +1,61 @@
+const colors = [
+    'red',
+    'blue',
+    'green',
+    'yellow',
+    'purple',
+    'orange',
+    'pink',
+    'cyan',
+    'magenta',
+    'lime'
+];
+
+
+const container = document.querySelector('#container')
+const reset = document.getElementById('reset')
+const undo = document.getElementById('undo')
+const redo = document.getElementById('redo')
+let dots = []
+let updatedArray = []
+
+container.addEventListener('click', function(event){
+    const dot = document.createElement('div')
+    dot.className = 'dot';
+
+    dot.style.left = `${event.clientX - 5}px`;
+    dot.style.top = `${event.clientY - 5}px`;
+    
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    dot.style.backgroundColor = randomColor;
+
+    container.append(dot)
+    dots.push(dot);
+    updatedArray = []
+    removedDots = []
+})
+
+
+undo.addEventListener('click', ()=>{
+    if(dots.length > 0 ) {
+     const removedDot =  dots.remove();
+      updatedArray.push(removedDot)
+
+    }
+})
+
+redo.addEventListener('click', ()=>{
+    if(updatedArray.length > 0) {
+            const latestDeletedDot =  updatedArray.pop();
+             dots.push(latestDeletedDot)
+             container.append(latestDeletedDot)
+           
+    }
+})
+
+
+reset.addEventListener('click', ()=>{
+    dots.forEach(dot => dot.remove() )
+    dots =[]
+    updatedArray = []
+})
