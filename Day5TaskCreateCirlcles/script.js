@@ -43,6 +43,8 @@ reset.addEventListener('click', ()=>{
     dots.forEach((dot) => dot.remove())
     removedDots = []
     dots = []
+
+    DisplayBtnCSS()
 })
 
 undo.addEventListener('click', () =>{
