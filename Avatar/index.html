@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avatar</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="avatar-wrapper">
+        <div class="avatar-container"></div>
+        <div class="add-avatar">+</div>
+    </div>
+
+    <div id="nameModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Enter your name:</p>
+          <input type="text" id="nameInput" placeholder="Enter your name" />
+          <div class="buttons">
+            <button id="confirmBtn">Confirm</button>
+            <button id="cancelBtn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    <!-- <script src="script.js"></script> -->
+     <script src="localStorage.js"></script>
+  </body>
+</html>
