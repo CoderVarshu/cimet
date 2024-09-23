@@ -41,8 +41,6 @@ let questionCount = 1;
 const completedQuestionIndex = [];
 const shortedQuiz = quizQuestions.sort(() => 0.5 - Math.random())
 const totalQuestion = [...quizQuestions];
-// let questionIndex = Math.floor(Math.random() * totalQuestion.length);
-
 
 let questionIndex = 1
 completedQuestionIndex.push(questionIndex)
