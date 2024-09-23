@@ -40,10 +40,10 @@ function createAvatar(name) {
     saveNameToLocalStorage(name)
      displayAvatar();
 }
-
+// 
 function displayAvatar() {
 
-    avtarContainer.innerHTML += ''
+    avtarContainer.innerHTML = ''
     console.log("Array", nameInputs, avtarContainer)
     
     if (nameInputs.length === 0) {
@@ -72,15 +72,14 @@ function displayAvatar() {
         closeIcon.classList.add('fa-solid')
         closeIcon.classList.add('fa-x');
         avatar.appendChild(closeIcon)
-        
+        avtarContainer.append(avatar)
         closeIcon.addEventListener('click', () => {
             removeNameFromLocalStorage(index);
         });
         
-        avtarContainer.append(avatar)
-
+        
+        console.log("Conatiner", avtarContainer)
     });
-
 
 }
 
@@ -97,14 +96,10 @@ window.onclick = function(event) {
        localStorage.setItem("nameInputs", JSON.stringify(nameInputs));
       console.log("HII")
    }
-
-
-   displayAvatar()
 }
 
 function removeNameFromLocalStorage(index) {
     nameInputs.splice(index, 1)
    localStorage.setItem("nameInputs", JSON.stringify(nameInputs));
-   avtarContainer.append(nameInputs)
    displayAvatar()
 }

@@ -10,6 +10,8 @@ const lightColors = ['#FFC300', '#DAF7A6', '#F7DC6F', '#AED6F1', '#ABEBC6'];
 const darkColors = ['#581845', '#1F618D', '#196F3D', '#C70039', '#34495E'];
 
 
+let nameInputs =[]
+
 function OpenModal () {
     modal.style.display = 'block'
 }
@@ -36,9 +38,18 @@ confirmBtn.addEventListener('click', ()=>{
      }
 })
 
-function createAvatar(letter) {
+function createAvatar(name) {
 
-    avtarContainer.innerHTML += ''
+    nameInputs.push(name);
+    displayAvatar()
+}
+
+function displayAvatar () {
+
+    avtarContainer.innerHTML = ''
+
+    nameInputs.forEach((letter, index) => {
+
     const avatar = document.createElement('div')
     avatar.classList.add("avatar");
     avatar.textContent = letter
@@ -63,8 +74,15 @@ function createAvatar(letter) {
     avtarContainer.append(avatar)
 
     closeIcon.addEventListener('click', () => {
-        avatar.remove();
+        deleteAvatar(index)
     });
+  });
+}
+
+
+function deleteAvatar(index){
+    nameInputs.splice(index,1)
+    displayAvatar()
 }
 
 

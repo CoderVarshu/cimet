@@ -6,7 +6,7 @@ const updateList = document.querySelector("#update-list");
 const itemsArray = localStorage.getItem("items")
   ? JSON.parse(localStorage.getItem("items"))
   : [];
-console.log("Storage Data", itemsArray);
+console.log("Storage Data", JSON.parse(localStorage.getItem("items")));
 
 AddBtn.addEventListener("click", (e) => {
   createItem(input.value);
@@ -71,10 +71,11 @@ function deleteItem(index) {
 
   function editItem(index) {
     const updatedTask = prompt("Update Task", itemsArray[index])
-    if(updatedTask !== null && newTask.trim()) {
+    if(updatedTask !== null && updatedTask.trim()) {
         itemsArray[index] = updatedTask
         localStorage.setItem("item", JSON.stringify(updatedTask))
     }
+    console.log("Updated Task", itemsArray[index])
     displayItems()
   }
 
