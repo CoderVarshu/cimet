@@ -3,6 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import '../Styles/style.css'
 
 const ListToDo = ({
   toDoArr,
@@ -16,10 +17,13 @@ const ListToDo = ({
   const [updatedToDo, setUpdatedToDo] = useState("");
 
   return (
-    <div>
+    <>
+       
+    <div className="todo-container">
+
       {toDoArr?.map((item) => (
-        <div key={item.id}>
-          {item.todo}
+        <div key={item.id} className="todo-item">
+        <span> {item.todo} </span> 
           <div>
             <input
               type="checkbox"
@@ -58,6 +62,7 @@ const ListToDo = ({
         </div>
       )}
     </div>
+    </>
   );
 };
 

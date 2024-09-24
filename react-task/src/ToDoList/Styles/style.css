@@ -1,0 +1,156 @@
+
+/* Input and Add Button Container */
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 25px auto;
+  }
+  
+  /* Input styling */
+  .input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input:focus {
+    border-color: #17a2b8;
+  }
+  
+  /* Add button styling */
+  .add-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .clear-btn {
+    padding: 10px 20px;
+    background-color: #f15f55;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .clear-btn:hover{
+    background-color: #bd4037;
+  }
+  
+  .add-btn:hover {
+    background-color: #218838;
+  }
+  
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+ 
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Optional styling for buttons */
+  button {
+    margin: 10px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  input {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .todo-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Each task styling */
+  .todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .todo-item:last-child {
+    border-bottom: none;
+  }
+ 
+  .todo-item span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    flex-grow: 1;
+  }
+  
+  .todo-item input[type="checkbox"] {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .todo-item .fa-trash,
+  .todo-item .fa-pen-to-square {
+    cursor: pointer;
+    color: #6c757d;
+    font-size: 18px;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+  }
+  
+  .todo-item .fa-trash:hover {
+    color: #dc3545; /* Red color for delete */
+  }
+  
+  .todo-item .fa-pen-to-square:hover {
+    color: #17a2b8; /* Blue color for edit */
+  }
+  
