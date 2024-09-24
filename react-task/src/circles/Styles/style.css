@@ -1,0 +1,33 @@
+.reset-btn {
+  background-color: red;
+  width: fit-content;
+  height: 35px;
+  padding: 10px;
+  color: white;
+}
+
+.undo-btn {
+  background-color: yellowgreen;
+  width: fit-content;
+  height: 35px;
+  padding: 10px;
+  color: white;
+  margin: 5px;
+}
+
+.redo-btn {
+  background-color: green;
+  width: fit-content;
+  height: 35px;
+  padding: 10px;
+  color: white;
+}
+
+.disabled {
+  width: fit-content;
+  height: 35px;
+  cursor: not-allowed;
+  background: grey;
+  color: black;
+  margin: 5px;
+}

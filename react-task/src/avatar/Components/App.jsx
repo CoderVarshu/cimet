@@ -1,8 +1,6 @@
-import React from 'react'
 import ListAvatars from './ListAvatars'
 import FormAvatar from './FormAvatar'
 import { useState } from 'react'
-import { useEffect } from 'react'
 import AddAvatar from './AddAvatar'
 
 const AvatarApp = () => {
