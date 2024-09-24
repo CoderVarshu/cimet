@@ -18,7 +18,7 @@ const ListToDo = ({
 
   return (
     <>
-       
+       {toDoArr?.length !== 0 ?
     <div className="todo-container">
 
       {toDoArr?.map((item) => (
@@ -35,6 +35,7 @@ const ListToDo = ({
               icon={faTrash}
               onClick={() => handleDelete(item.id)}
             />
+            {item.completed ? '' :
             <FontAwesomeIcon
               icon={faPenToSquare}
               onClick={() => {
@@ -42,7 +43,7 @@ const ListToDo = ({
                 setOpenModal(true);
                 setSelectedToDo(item);
               }}
-            />
+            /> }
           </div>
         </div>
       ))}
@@ -61,7 +62,8 @@ const ListToDo = ({
           </div>
         </div>
       )}
-    </div>
+    </div> 
+    :''}
     </>
   );
 };

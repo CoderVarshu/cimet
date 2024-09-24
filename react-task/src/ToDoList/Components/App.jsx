@@ -68,10 +68,16 @@ const ToDoApp = () => {
      setSelectedToDo(null);
   };
 
+  const handleClear=()=>{
+    setToDoArr([])
+    localStorage.clear()
+  }
 
   return (
     <>
-      <AddToDo handleAddToDO={handleAddToDO} />
+      <AddToDo 
+       handleClear={handleClear}
+      handleAddToDO={handleAddToDO} />
       <ListToDo
         handleUpdate={handleUpdate}
         toDoArr={toDoArr}

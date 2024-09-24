@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
-const AddToDo = ({ handleAddToDO, selectedToDo }) => {
+const AddToDo = ({ handleAddToDO, selectedToDo, handleClear }) => {
   const [inputToDo, setInputToDo] = useState("");
 
   useEffect(() => {}, [selectedToDo]);
@@ -23,7 +23,9 @@ const AddToDo = ({ handleAddToDO, selectedToDo }) => {
       >
         Add
       </button>
-      <button className="clear-btn">
+      <button
+       onClick={handleClear}
+      className="clear-btn">
         Clear All
        </button>
     </div>
