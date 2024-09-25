@@ -28,6 +28,7 @@ function DisplayQuestion() {
     button.textContent = option;
     button.setAttribute("class", "options");
     button.addEventListener("click", (e) => {
+
       if (e.target.innerText === quizQuestions[questionIndex].correct) score++;
        
     });
@@ -35,6 +36,8 @@ function DisplayQuestion() {
   });
 
   let id = setInterval(() => {
+
+    console.log("Score", score)
     if (count < 0) {
       clearInterval(id);
       count = 5;
