@@ -9,13 +9,13 @@ const headers = {
 };
 
 export const fetchDataFromApi = async(url, params) =>{
-    try{
+    try{ 
         
         const { data } = await axios.get(BASE_URL + url, {
             headers,
             params: {
-                api_key: API_KEY, // Include the API key as a query parameter
                 ...params,
+                api_key: API_KEY,
             },
         });
 
@@ -26,3 +26,6 @@ export const fetchDataFromApi = async(url, params) =>{
         return err;
     }
 }
+
+
+export const imagePreUrl = "https://image.tmdb.org/t/p/" + "original"
