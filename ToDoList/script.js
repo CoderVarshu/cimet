@@ -75,13 +75,11 @@ function deleteItem(index) {
         itemsArray[index] = updatedTask
         localStorage.setItem("item", JSON.stringify(updatedTask))
     }
-    console.log("Updated Task", itemsArray[index])
     displayItems()
   }
 
   function deleteAll() {
     localStorage.clear()
     itemsArray.length = 0
-    console.log("Stored",itemsArray)
     displayItems()
   }

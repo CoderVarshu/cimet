@@ -20,7 +20,7 @@ const redo = document.getElementById('redo')
  let removedDots = []
 
 
-container.addEventListener("click", function (event) {
+  container.addEventListener("click", function (event) {
   const dot = document.createElement("div");
   dot.className = "dot";
 
@@ -35,7 +35,6 @@ container.addEventListener("click", function (event) {
     removedDots = []
 
     DisplayBtnCSS()
-
 });
 
 

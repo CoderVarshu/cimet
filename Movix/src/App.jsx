@@ -1,33 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from "react"
+import { fetchDataFromApi } from "./Services/Api"
+import { useDispatch, useSelector } from "react-redux"
+import { getApiConfiguration } from "./Store/homeSlice"
 
 function App() {
-  const [count, setCount] = useState(0)
+
+ const dispatch = useDispatch()
+ const url = useSelector((state)=>{
+   state.home
+ })
+
+ console.log("URL", url)
+
+useEffect(()=>{
+ fetchData()
+ console.log("URL", url)
+
+}, [])
+
+const fetchData = () => {
+  fetchDataFromApi('movie/popular', { language: 'en-US', page: 10 })
+    .then((res) => {
+      console.log("Movie", res);
+      
+      // Dispatch the action after getting the response
+      dispatch(getApiConfiguration(res));
+
+      // If dispatch does not return a promise, no need to chain another .then() here
+    })
+    .catch((err) => {
+      console.error("Error fetching data", err);
+    });
+};
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+     {/* {url?.total_pages} */}
     </>
   )
 }
