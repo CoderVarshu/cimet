@@ -25,7 +25,7 @@ const Details = () => {
   }, [mediaType, id])
 
   const handleTrailor=()=>{
-    
+
   }
 
   return (
@@ -51,7 +51,8 @@ const Details = () => {
                     : ("(" + dayjs(mediaDetails?.first_air_date).format("YYYY") + ")")}</li>
                 <li className="tagline">{mediaDetails?.tagline}</li>
                 <li className="detailsInfo">
-                  <Ratings rating={mediaDetails?.vote_average} />
+                {mediaDetails?.vote_average !==0 ? <Ratings rating={mediaDetails?.vote_average} />
+                  :''}
                   <span className='text' onClick={()=>{
                     handleTrailor()
                   }}>

@@ -30,9 +30,9 @@ export const fetchDataFromApi = async(url, params) =>{
 export const imagePreUrl = "https://image.tmdb.org/t/p/" + "original"
 
 
-export const fetchAllMovie = async(type)=>{
+export const fetchAllMovie = async(type, sortBy)=>{
     try{
-         let url = `${BASE_URL}discover/${type}?language=en-US&page=1&api_key=${API_KEY}`
+         let url = `${BASE_URL}discover/${type}?language=en-US&sort_by=${sortBy}&page=1&api_key=${API_KEY}`
           let {data} = await axios.get(url)
            return data?.results
     }
@@ -52,3 +52,16 @@ export const fetchMedia = async(type, id)=>{
          console.log(err)
     }
 }
+
+
+export const getBySearch = async(term)=>{
+    try{
+         let url = `${BASE_URL}search/movie?query=${term}&page=1&api_key=${API_KEY}`
+          let {data} = await axios.get(url)
+           return data
+    }
+    catch(err) {
+         console.log(err)
+    }
+}
+

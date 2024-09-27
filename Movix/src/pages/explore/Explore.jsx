@@ -11,22 +11,31 @@ const Explore = () => {
   const { mediaType } = useParams()
   const navigate = useNavigate()
   const [exploreData, setExploreData] = useState([])
+  const [selectedSort, setSelectedSort] = useState('')
 
-
-  const getMovies = async (mediaType) => {
-    const movies = await fetchAllMovie(mediaType);
+  const getMovies = async (mediaType, sort) => {
+    const movies = await fetchAllMovie(mediaType , sort);
     setExploreData(movies)
   };
 
   useEffect(() => {
-    if(mediaType ==='movie' || mediaType === 'tv') getMovies(mediaType)
+    if(mediaType ==='movie' || mediaType === 'tv') getMovies(mediaType, selectedSort)
       else navigate('/')
-  }, [mediaType])
+  }, [mediaType,selectedSort])
 
   return (
     <div>
+      <select onChange={(e)=>{setSelectedSort(e.target.value)
+        console.log("Selected Value", e.target.value)
+      }}>
+        <option value=""></option>
+        <option value="popularity.desc">Popularity Descending</option>
+        <option value="popularity.asc">Popularity Ascending</option>
+        <option value="Pvote_average.desc">Rating Descending</option>
+        <option value="Pvote_average.asc">Rating Ascending</option>
+      </select>
       <div className='movie-card'>
-        {exploreData?.map((item, i) => (
+        {exploreData && exploreData?.map((item, i) => (
           <div key={i} className='card-item' onClick={()=>{
              navigate(`/explore/${mediaType}/${item.id}`)
           }} >
