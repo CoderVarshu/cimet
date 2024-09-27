@@ -15,7 +15,7 @@ function Banner() {
 
   const { data, loading } = FetchActions('movie/upcoming', {})
 
-  console.log("DATA", data?.result)
+  console.log("DATA", data?.result, loading)
 
   useEffect(() => {
     const bg = imagePreUrl + data?.results?.[(Math.floor(Math.random() * 20))]?.backdrop_path
@@ -34,7 +34,7 @@ function Banner() {
       <div className="backdrop-img">
         <MyImage
           src={background}
-          caption={"Background"}
+          // caption={"Background"}
           alt={"Random-Background"}
         />
       </div>

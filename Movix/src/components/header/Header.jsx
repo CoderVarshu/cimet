@@ -1,40 +1,57 @@
 import './style.scss'
 import logo from '../../assets/movix-logo.svg'
-import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import {  useNavigate } from 'react-router-dom'
 import ContentWrapper from '../contentWrapper/contentWrapper';
-import { HiOutlineSearch } from "react-icons/hi";
+// import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
 
   const [show, setShow] = useState("top")
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [input, setInput] = useState("")
-  const [showSearch, setShowSearch] = useState("")
+  const location = useLocation()
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const openSearch = () => {
-    setMobileMenu(false)
-    setShowSearch(true)
-  }
 
   const openMobileMenu = () => {
     setMobileMenu(true)
-    setShowSearch(false)
+    setShow("top")
   }
 
-  const searchQueryHandler = (e) => {
-    if (e.key === 'Enter' && input.length > 0) {
-      navigate(`/search/${input}`)
-      setTimeout(() => {
-        setShowSearch(false)
-      }, 1000)
-    }
+useEffect(()=>{
+   window.scrollTo(0, 0)
+}, [location])
+
+  const handleNavigate =(type) =>{
+      if(type === 'movie') navigate('/explore/movie')
+      if (type === 'tv') navigate('/explore/tv')
+        setMobileMenu(false)
+       
   }
+
+  // const controlNavbar = () => {
+  //   if (window.scrollY > 200){
+  //     if (window.scrollY > lastScrollY && !mobileMenu){
+  //       setShow("hide")
+  //     }else{
+  //       setShow("show")
+  //     }
+  //   }
+  //   else {
+  //     setShow("top")
+  //   }
+  //   setLastScrollY(window.scrollY)
+  // }
+
+  // useEffect(()=>{
+  //   window.addEventListener("scroll", controlNavbar);
+  //   return () => {
+  //     window.removeEventListener("scroll", controlNavbar)
+  //   }
+  // }, [lastScrollY])
 
   return (
     <header className={`header ${mobileMenu ? "mobileView" : " "} ${show}`
@@ -44,18 +61,22 @@ const Header = () => {
           <img src={logo} alt='' />
         </div>
         <ul className="menuItems">
-          <li className="menuItem">Movies</li>
-          <li className="menuItem">TV Shows</li>
-          <li className="menuItem">
+          <li className="menuItem" 
+            onClick={()=> handleNavigate("movie")}
+          >Movies</li>
+          <li className="menuItem" 
+            onClick={()=> handleNavigate("tv")}
+          >TV Shows</li>
+          {/* <li className="menuItem">
             <HiOutlineSearch  onClick={openSearch} />
-          </li>
+          </li> */}
         </ul>
         <div className='mobileMenuItems'>
-          <HiOutlineSearch  />
+          {/* <HiOutlineSearch  /> */}
           {mobileMenu ? <VscChromeClose onClick={() => setMobileMenu(false)} /> : <SlMenu onClick={openMobileMenu} />}
         </div>
       </ContentWrapper>
-      {showSearch &&
+      {/* {showSearch &&
       <div className="searchBar">
         <ContentWrapper>
           <div className="searchInput">
@@ -70,7 +91,7 @@ const Header = () => {
             <VscChromeClose onClick={() => setShowSearch(false)} />
           </div>
         </ContentWrapper>
-      </div>}
+      </div>} */}
     </header>
   )
 }

@@ -1,4 +1,3 @@
-import Route from "./routes/Route"
 
 function App() {
 

@@ -8,7 +8,6 @@ const Home = () => {
   return (
   <>
    <Header />
-   {/* <div>helo</div> */}
    <Outlet/>
    <Footer />
   </>
