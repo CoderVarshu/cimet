@@ -10,27 +10,18 @@ const SearchResult = () => {
   const query = useLocation()
   const navigate = useNavigate()
   const [searchData, setSearchData] = useState([])
-  console.log("QUERY", query.pathname.split('/search/')[1]
-    )
    const newQuery = decodeURI(query.pathname.split('/search/')[1])
 
  const getSearch = async() =>{
     const searchData = await getBySearch(newQuery)
     setSearchData(searchData?.results)
-    console.log("SearchData", searchData?.results)
  }
 
    useEffect(()=>{
     getSearch()
    },[query])
 
-  return (
-    // <div style={{display:'flex', height:'100vh', alignItems:'center', justifyContent:'center'}}>
-      
-    //   SearchResult
-      
-    //   </div>
-  
+  return (  
     <div className='movie-card'>
     {searchData?.map((item, i) => (
       <div key={i} className='card-item' onClick={()=>{

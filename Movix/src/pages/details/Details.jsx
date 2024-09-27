@@ -25,7 +25,7 @@ const Details = () => {
   }, [mediaType, id])
 
   const handleTrailor=()=>{
-
+       
   }
 
   return (

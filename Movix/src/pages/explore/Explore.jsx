@@ -21,14 +21,15 @@ const Explore = () => {
   useEffect(() => {
     if(mediaType ==='movie' || mediaType === 'tv') getMovies(mediaType, selectedSort)
       else navigate('/')
+    console.log("Selected Value", selectedSort)
   }, [mediaType,selectedSort])
 
   return (
     <div>
-      <select onChange={(e)=>{setSelectedSort(e.target.value)
-        console.log("Selected Value", e.target.value)
+      <select className='select' onChange={(e)=>{setSelectedSort(e.target.value)
+        
       }}>
-        <option value=""></option>
+        <option value="">Sort By </option>
         <option value="popularity.desc">Popularity Descending</option>
         <option value="popularity.asc">Popularity Ascending</option>
         <option value="Pvote_average.desc">Rating Descending</option>
