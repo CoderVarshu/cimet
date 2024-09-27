@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import './style.scss'
 import { useNavigate } from 'react-router-dom'
-import FetchActions from '../../../services/Actions'
+import useFetchActions from '../../../services/Actions'
 import { imagePreUrl } from '../../../services/Api'
 import MyImage from '../../../LazyLoadingImage/Image'
 import ContentWrapper from '../../../components/contentWrapper/contentWrapper'
-
+import defaultPoster from '../../../assets/default-poster.jfif'
+// src\assets\default-poster2.jfif
 function Banner() {
 
   const navigate = useNavigate()
@@ -13,15 +14,14 @@ function Banner() {
   const [input, setInput] = useState('')
   const [background, setBackground] = useState('')
 
-  const { data, loading } = FetchActions('movie/upcoming', {})
-
-  console.log("DATA", data?.result, loading)
+  const { data, loading } = useFetchActions('movie/upcoming', {})
 
   useEffect(() => {
-    const bg = imagePreUrl + data?.results?.[(Math.floor(Math.random() * 20))]?.backdrop_path
-    console.log("BAckGround", bg)
-    setBackground(bg)
-  }, [data])
+    const randomIndex = Math.floor(Math.random() * 20);
+    const backdropPath = data?.results?.[randomIndex]?.backdrop_path;
+    const bg = backdropPath ? imagePreUrl + backdropPath : defaultPoster;
+    setBackground(bg);
+  }, [data]);
 
   const searchQueryHandler = (e) => {
     if (e.key === 'Enter' && input.length > 0) {
@@ -33,8 +33,7 @@ function Banner() {
     <div className="banner">
       <div className="backdrop-img">
         <MyImage
-          src={background}
-          // caption={"Background"}
+          src={background }
           alt={"Random-Background"}
         />
       </div>

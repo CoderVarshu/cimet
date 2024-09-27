@@ -6,10 +6,8 @@ const MyImage = ({ src, className, caption, alt }) => (
     <div>
       <LazyLoadImage
         alt={alt}
-        // height={height}
         effect='blur'
         src={src}
-        // width={width}
         className={className}
          />
       <span>{caption}</span>

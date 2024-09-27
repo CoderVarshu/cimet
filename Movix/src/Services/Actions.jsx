@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { fetchDataFromApi } from "./Api"
 
-const FetchActions = (url, params) => {
+const useFetchActions = (url, params) => {
    
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(null)
@@ -28,4 +28,4 @@ const FetchActions = (url, params) => {
     return {data, loading, error}
 }
 
-export default FetchActions
+export default useFetchActions

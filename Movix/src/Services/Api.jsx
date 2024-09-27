@@ -27,5 +27,28 @@ export const fetchDataFromApi = async(url, params) =>{
     }
 }
 
-
 export const imagePreUrl = "https://image.tmdb.org/t/p/" + "original"
+
+
+export const fetchAllMovie = async(type)=>{
+    try{
+         let url = `${BASE_URL}discover/${type}?language=en-US&page=1&api_key=${API_KEY}`
+          let {data} = await axios.get(url)
+           return data?.results
+    }
+    catch(err) {
+         console.log(err)
+    }
+}
+
+
+export const fetchMedia = async(type, id)=>{
+    try{
+         let url = `${BASE_URL}${type}/${id}?language=en-US&page=1&api_key=${API_KEY}`
+          let {data} = await axios.get(url)
+           return data
+    }
+    catch(err) {
+         console.log(err)
+    }
+}
