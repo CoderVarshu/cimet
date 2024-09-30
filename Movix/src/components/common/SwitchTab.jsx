@@ -9,9 +9,6 @@ const SwitchTab = ({data, onTabChange}) => {
 
     const [selectedTab, setSelectedTab] = useState(0)
 
-
-
-
     const activeTab = (tab, i) => {
         setSelectedTab(i)
          onTabChange(tab)
@@ -28,7 +25,6 @@ const SwitchTab = ({data, onTabChange}) => {
                     {tab}
                 </span>
             ))}
-                {/* <span className="movingBg" style={{left}}></span> */}
          </div>
         </div>
   )

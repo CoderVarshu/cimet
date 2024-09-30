@@ -65,3 +65,14 @@ export const getBySearch = async(term)=>{
     }
 }
 
+export const getMovieTrailor = async(mediaType,id)=> {
+
+    try{
+    let url = `${BASE_URL}${mediaType}/${id}/videos?api_key=${API_KEY}`
+    let {data} = await axios.get(url)
+    return data
+    }
+    catch(err){
+   console.log(err)
+    }
+}

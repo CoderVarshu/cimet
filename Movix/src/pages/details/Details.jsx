@@ -14,6 +14,7 @@ const Details = () => {
   const { mediaType, id } = useParams()
   const [mediaDetails, setMediaDetails] = useState([])
   const [modalIsOpen, setIsOpen] =  useState(false);
+ const [mediaId, setMediaId] = useState('')
 
   const getMediaDetails = async () => {
     const details = await fetchMedia(mediaType, id)
@@ -32,7 +33,9 @@ const Details = () => {
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
+      backgrounColor: 'none',
+      inset: '20% auto auto 20%',
+      // transform: 'translate(-50%,  -50%)',
     },
   };
   
@@ -44,14 +47,9 @@ const Details = () => {
 
   function App() {
     let subtitle;
-  
-    function openModal() {
-      setIsOpen(true);
-    }
-  
+
     function afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      // subtitle.style.color = '#f00';
+      subtitle.style.color = '#f00';
     }
   
     function closeModal() {
@@ -67,7 +65,7 @@ const Details = () => {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <IFrame />
+          <IFrame mediaType={mediaType} id={mediaId}  />
         </Modal>
       </div>
     );
@@ -80,8 +78,8 @@ const Details = () => {
         <div className='detailsWrapper'>
           <div className='detailsImage' >
             <img
-              width={350}
-              height={500}
+              width={400}
+              height={600}
               className='detailsImage'
               src={imagePreUrl + mediaDetails.poster_path}
             />
@@ -95,11 +93,20 @@ const Details = () => {
                     ? ("(" + dayjs(mediaDetails.release_date).format("YYYY") + ")")
                     : ("(" + dayjs(mediaDetails?.first_air_date).format("YYYY") + ")")}</li>
                 <li className="tagline">{mediaDetails?.tagline}</li>
+                <li className='generesWrapper'>
+                  {mediaDetails?.genres?.map((generes,i)=>(
+                    <div className='generes' key={i}>
+                       {generes?.name}
+                    </div>
+                  ))} 
+                  </li>
                 <li className="detailsInfo">
                 {mediaDetails?.vote_average !==0 ? <Ratings rating={mediaDetails?.vote_average} />
                   :''}
                   <span className='text' onClick={()=>{
+                    setMediaId(mediaDetails.id)
                     handleTrailor()
+
                   }}>
                     <AiOutlinePlayCircle size={80} className='playIcon' />
                     Watch Trailer </span>

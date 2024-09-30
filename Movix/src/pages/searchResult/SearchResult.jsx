@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Ratings from '../../components/common/ratings/Ratings'
 import dayjs from 'dayjs'
 import deafultImg from '../../assets/default-image.avif'
+import noDataImage from '../../assets/no-data.gif'
+
 
 const SearchResult = () => {
 
@@ -23,7 +25,7 @@ const SearchResult = () => {
 
   return (  
     <div className='movie-card'>
-    {searchData?.map((item, i) => (
+    { searchData && searchData?.map((item, i) => (
       <div key={i} className='card-item' onClick={()=>{
          navigate(`/explore/movie/${item.id}`)
       }} >
@@ -50,6 +52,15 @@ const SearchResult = () => {
       </div>
 
     ))}
+
+    {!searchData?.length && <>
+    <img 
+     src={noDataImage}
+     width={400}
+     height={400}
+    />
+    </>}
+
   </div>
   
   )

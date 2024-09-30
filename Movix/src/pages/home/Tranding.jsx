@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import SwitchTab from "../../components/common/switchTab"
 import ContentWrapper from "../../components/contentWrapper/contentWrapper"
 import useFetchActions from "../../services/Actions"
 import Carousel from "../../components/common/carousel/Carousel"
+import SwitchTab from "../../components/common/SwitchTab"
 
 const Tranding = () => {
 

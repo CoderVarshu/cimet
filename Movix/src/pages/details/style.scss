@@ -45,6 +45,10 @@
             // align-items: center;
             gap: 50px;
 
+            .CircularProgressbar .CircularProgressbar-trail {
+                stroke: var(--black);
+                stroke-linecap: round;
+            }
             .circleRating {
                 width: 80px;
                 height: 80px;
@@ -73,7 +77,17 @@
             padding-right: 100px;
             line-height: 24px;
         }
-
+        .generesWrapper{
+            display: flex;
+            .generes{
+                margin: 10px;
+                padding: 5px;
+                border-radius: 5px;
+                width: fit-content;
+                background-color: var(--pink);
+                font-size: 12px;
+            }
+        }
 
     }
 
@@ -101,3 +115,11 @@
     }
 
 }
+
+
+.iframeWrapper {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // height: 100vh;
+  }
