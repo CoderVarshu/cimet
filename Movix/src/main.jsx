@@ -5,13 +5,15 @@ import { RouterProvider } from 'react-router-dom'
 import Home from './pages/home/Home.jsx'
 import router from './routes/Route.jsx'
 import store from './store/store.js'
+import AuthContext from './context/AuthContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
     <RouterProvider router={router}>
-        <Provider store={store} >
+        <AuthContext>
         <Home />
-        </Provider> 
+        </AuthContext>
+     
     </RouterProvider>
 )
 

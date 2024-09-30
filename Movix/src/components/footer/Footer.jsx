@@ -6,11 +6,15 @@ import {
 } from "react-icons/fa";
 import "./style.scss";
 import ContentWrapper from "../contentWrapper/contentWrapper";
+import { useContext } from "react";
+import { authContext } from "../../context/AuthContext";
 
 const Footer = () => {
+    let auth=useContext(authContext)
     return (
         <footer className="footer">
             <ContentWrapper>
+               { console.log("Auth",auth)}
                 <ul className="menuItems">
                     <li className="menuItem">Terms Of Use</li>
                     <li className="menuItem">Privacy-Policy</li>
