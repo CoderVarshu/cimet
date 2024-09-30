@@ -6,26 +6,71 @@ import ContentWrapper from '../../components/contentWrapper/contentWrapper';
 import Ratings from '../../components/common/ratings/Ratings';
 import dayjs from 'dayjs';
 import { AiOutlinePlayCircle } from "react-icons/ai";
+import Modal from 'react-modal';
+import IFrame from './IFrame';
 
 const Details = () => {
 
   const { mediaType, id } = useParams()
   const [mediaDetails, setMediaDetails] = useState([])
-
-  console.log("Details", mediaType, id)
+  const [modalIsOpen, setIsOpen] =  useState(false);
 
   const getMediaDetails = async () => {
     const details = await fetchMedia(mediaType, id)
     setMediaDetails(details)
-    console.log("MEDIA Details", details)
   }
 
   useEffect(() => {
     getMediaDetails()
   }, [mediaType, id])
 
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+  
+
   const handleTrailor=()=>{
-       
+      setIsOpen(true)
+  }
+    
+
+  function App() {
+    let subtitle;
+  
+    function openModal() {
+      setIsOpen(true);
+    }
+  
+    function afterOpenModal() {
+      // references are now sync'd and can be accessed.
+      // subtitle.style.color = '#f00';
+    }
+  
+    function closeModal() {
+      setIsOpen(false);
+    }
+  
+    return (
+      <div>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <IFrame />
+        </Modal>
+      </div>
+    );
   }
 
   return (
@@ -94,8 +139,7 @@ const Details = () => {
               </ui>
             </div>
           </div>
-
-
+            {App()}
         </div>
       </ContentWrapper>
     </>
