@@ -7,6 +7,7 @@ import ContentWrapper from '../contentWrapper/contentWrapper';
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Header = () => {
 
@@ -15,6 +16,7 @@ const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const location = useLocation()
   const navigate = useNavigate();
+  
 
   const openMobileMenu = () => {
     setMobileMenu(true)
