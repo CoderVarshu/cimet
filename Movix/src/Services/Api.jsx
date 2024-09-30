@@ -76,3 +76,29 @@ export const getMovieTrailor = async(mediaType,id)=> {
    console.log(err)
     }
 }
+
+
+export const getPopular = async(mediaType)=> {
+
+    try{
+    let url = `${BASE_URL}${mediaType}/popular?language=en-US&page=1&api_key=${API_KEY}`
+    let {data} = await axios.get(url)
+    return data
+    }
+    catch(err){
+   console.log(err)
+    }
+}
+
+export const getTopRated = async(mediaType)=> {
+
+    try{
+    let url = `${BASE_URL}${mediaType}/top_rated?language=en-US&page=1&api_key=${API_KEY}`
+    let {data} = await axios.get(url)
+    return data
+    }
+    catch(err){
+   console.log(err)
+    }
+}
+

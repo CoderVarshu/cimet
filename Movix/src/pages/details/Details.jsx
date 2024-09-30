@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchMedia, imagePreUrl } from '../../services/Api'
 import './style.scss';
@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import Modal from 'react-modal';
 import IFrame from './IFrame';
+import defaultImg from '../../assets/default-image.avif';
 
 const Details = () => {
 
@@ -81,7 +82,7 @@ const Details = () => {
               width={400}
               height={600}
               className='detailsImage'
-              src={imagePreUrl + mediaDetails.poster_path}
+              src={mediaDetails?.poster_path ? imagePreUrl + mediaDetails?.poster_path : defaultImg}
             />
           </div>
           <div>

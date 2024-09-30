@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchAllMovie, imagePreUrl } from '../../services/Api'
 import './style.scss';
@@ -21,7 +21,6 @@ const Explore = () => {
   useEffect(() => {
     if(mediaType ==='movie' || mediaType === 'tv') getMovies(mediaType, selectedSort)
       else navigate('/')
-    console.log("Selected Value", selectedSort)
   }, [mediaType,selectedSort])
 
   return (

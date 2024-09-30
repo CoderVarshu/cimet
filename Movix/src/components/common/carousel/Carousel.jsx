@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { useEffect, useRef } from "react";
+// import { useEffect} from "react";
 import "./style.scss";
 import ContentWrapper from "../../contentWrapper/contentWrapper";
 import { imagePreUrl } from "../../../services/Api";
@@ -12,13 +12,12 @@ import defaultImg from '../../../assets/default-image.avif';
 
 
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, media }) => {
   const navigate = useNavigate();
-  const containerRef = useRef();
 
-  useEffect(() => {
-    // console.log("Data", data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log("Data", data);
+  // }, [data]);
 
 
 
@@ -29,7 +28,8 @@ const Carousel = ({ data, loading }) => {
           <div className="carouselItems">
             {data?.map((item) => {
               return (
-                <div key={item.id} className="carouselItem" onClick={() => navigate(`/explore/${item.media_type}/${item.id}`)}>
+                <div key={item.id} className="carouselItem"
+                 onClick={() => navigate(`/explore/${item?.media_type ?? media }/${item?.id}`)}>
                   <div className="posterBlock">
                     <MyImage src={item?.poster_path ? imagePreUrl + item?.poster_path : defaultImg } />
                     <Ratings rating={item.vote_average.toFixed(1)} />
