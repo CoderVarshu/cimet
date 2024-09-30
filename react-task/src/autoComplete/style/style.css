@@ -1,0 +1,21 @@
+
+
+
+.sugestionDropDownWrapper{
+    width: 400px;
+    display: flex;
+  flex-direction: column;
+    justify-content: center;
+}
+
+
+
+
+.sugestionDropDown{
+    border-bottom: 1px solid black;
+    width: 100px;
+    padding: 5px;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+}
