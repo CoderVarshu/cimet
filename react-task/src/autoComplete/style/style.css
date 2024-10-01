@@ -1,21 +1,55 @@
-
-
-
-.sugestionDropDownWrapper{
-    width: 400px;
-    display: flex;
+.upiBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-    justify-content: center;
+  /* height: 90vh; */
+
+}
+
+.sugestionDropDownWrapper {
+  flex-direction: column;
+  justify-content: center;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 3rem;
+  list-style-type: none;
+  text-align: left;
+  margin-left: 12em;
+}
+
+input {
+  display: inline-block;
+}
+
+.inputContainer {}
+
+.showInput {
+  position: absolute;
+  z-index: 10;
+  background-color: transparent;
+}
+
+.hiddenInput {
+  position: absolute;
+  opacity: 0.5;
+}
+
+.sugestionDropDown {
+  border: 1px solid grey;
+  width: 145px;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 8px;
+  cursor: pointer;
+  margin-left: 15px;
 }
 
 
-
-
-.sugestionDropDown{
-    border-bottom: 1px solid black;
-    width: 100px;
-    padding: 5px;
-    background-color: beige;
-    display: flex;
-    justify-content: center;
+.sugestionDropDown.active {
+  background-color: #f0f0f0;
+  /* Highlight color */
 }

@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       {/* <AvatarApp /> */}
-      {/* <DotApp /> */}/
+      {/* <DotApp /> */}
       {/* <ToDoApp /> */}
       <AutoComplete />
     </>
