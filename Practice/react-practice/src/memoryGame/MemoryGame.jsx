@@ -11,7 +11,7 @@ import View from "./view";
 import Count from "./Count";
 
 const MemoryGame = () => {
-  const [flippedArr, setFlippedArr] = useState([]);
+  const [flippedCards, setFlippedCard] = useState([]);
   const [isFlipped, setIsFlipped] = useState(false);
   const [dataArr, setDataArr] = useState([]);
   const [turn, setTurn] = useState(0);
@@ -24,31 +24,37 @@ const MemoryGame = () => {
       name: "white",
       id: 1,
       image: whiteBird,
+      matches: false,
     },
     {
       name: "blackBird",
       id: 2,
       image: blackBird,
+      matches: false,
     },
     {
       name: "dualBird",
       id: 3,
       image: dualBird,
+      matches: false,
     },
     {
       name: "blueBird",
       id: 4,
       image: blueBird,
+      matches: false,
     },
     {
       name: "orangeBird",
       id: 5,
       image: orangeBird,
+      matches: false,
     },
     {
       name: "apple",
       id: 6,
       image: apple,
+      matches: false,
     },
   ];
 
@@ -62,48 +68,46 @@ const MemoryGame = () => {
   }, []);
 
   const handleFlip = (card) => {
-      turnOne ? setTurnTwo(card) : setTurnOne(card);
-      setTurn((prev) => prev + 1);
-      handleCheck();
+    if (turnOne) {
+      setTurnTwo(card)
+      setDataArr(dataArr.map((el) => el.id == card.id ? { ...el, matches: true } : el))
+    }
+    else {
+      setTurnOne(card)
+      setDataArr(dataArr.map((el) => el.id == card.id ? { ...el, matches: true } : el))
+
+
+    }
+    setTurn((prev) => prev + 1);
   };
 
   useEffect(() => {
-   
-       if(turnOne && turnTwo) {
-        if(turnOne.name === turnTwo.name){
-            // setScore((prev)=> prev+1)
-            // handleReset()
-        }
-        else{
-            // handleReset()
-        }
-       }
 
-  }, [turnOne, turnTwo]);
-
-  const handleCheck = () => {
     if (turnOne && turnTwo) {
       if (turnOne.name === turnTwo.name) {
-        console.log("Matches");
-         handleReset();
-      } else {
-        console.log("Not Matches");
-         handleReset();
+        setScore((prev) => prev + 1)
+        handleReset()
       }
-     
-    }
-  };
+      else {
+        setDataArr(dataArr.map((card) => card.id == turnTwo.id || card.name == turnOne.id ? { ...card, matches: false } : card))
 
+        handleReset()
+
+      }
+    }
+
+  }, [turnOne, turnTwo]);
+  console.log("else in useEffect", dataArr)
   const handleReset = () => {
-    setTurnOne([]);
-    setTurnTwo([]);
+    setTurnOne(null);
+    setTurnTwo(null);
   };
 
   return (
     <div className="card-grid">
       {/* <Count /> */}
-     Score : {score}
-     Clicked: {turn}
+      Score : {score}
+      Clicked: {turn}
       {dataArr?.map((item, i) => {
         return <View key={item.id} data={item} handleFlip={handleFlip} />;
       })}
