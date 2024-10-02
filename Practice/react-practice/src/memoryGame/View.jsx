@@ -25,7 +25,6 @@ const View = ({ data, handleFlip, flipped }) => {
           src={backImg}
           height={100}
           width={100}
-          // flipped={card == turnOne || card === turnTwo || card === data.matches}
         />
       </div>
     </div>

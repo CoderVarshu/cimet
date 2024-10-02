@@ -75,8 +75,6 @@ const MemoryGame = () => {
     else {
       setTurnOne(card)
       setDataArr(dataArr.map((el) => el.id == card.id ? { ...el, matches: true } : el))
-
-
     }
     setTurn((prev) => prev + 1);
   };
@@ -85,13 +83,15 @@ const MemoryGame = () => {
 
     if (turnOne && turnTwo) {
       if (turnOne.name === turnTwo.name) {
+        // setDataArr( (card) => card.map((el) => el.name == turnOne.name ? { ...el, matches: true } : el))
         setScore((prev) => prev + 1)
         handleReset()
       }
       else {
-        setDataArr(dataArr.map((card) => card.id == turnTwo.id || card.name == turnOne.id ? { ...card, matches: false } : card))
-
-        handleReset()
+        setTimeout(() => {
+          setDataArr(dataArr.map((card) => card.id == turnTwo.id || card.id == turnOne.id ? { ...card, matches: false } : card))
+          handleReset()
+        }, 1000)
 
       }
     }
@@ -105,11 +105,16 @@ const MemoryGame = () => {
 
   return (
     <div className="card-grid">
-      {/* <Count /> */}
+      <Count />
       Score : {score}
       Clicked: {turn}
       {dataArr?.map((item, i) => {
-        return <View key={item.id} data={item} handleFlip={handleFlip} />;
+        return <View
+          key={item.id}
+          data={item}
+          handleFlip={handleFlip}
+        //  flipped={item === turnOne || item === turnTwo ||  item.macted}
+        />;
       })}
     </div>
   );
