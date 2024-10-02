@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const Count = () => {
+const Count = ({count, setCount, timeRef}) => {
 
-  const [count, setCount] = useState(60)
- 
+ console.log("TIMER", timeRef)
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    timeRef.current = setInterval(() => {
       setCount(prevCount => {
         if (prevCount > 0) {
           return prevCount - 1;
         } else {
-          clearInterval(interval);
+          clearInterval(timeRef.current);
           return 0;
         }
       });
     }, 1000);
-    return () => clearInterval(interval);
-}, []);
+    return () => clearInterval(timeRef.current);
+}, [count]);
 
   return (
     <div>{count}</div>

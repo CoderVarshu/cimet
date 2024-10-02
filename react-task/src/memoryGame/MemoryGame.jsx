@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import blackBird from "./imges/BlackBird.png";
 import blueBird from "./imges/blueBird.png";
 import dualBird from "./imges/dualBirds.png";
@@ -18,6 +18,8 @@ const MemoryGame = () => {
   const [turnTwo, setTurnTwo] = useState(null);
   const [score, setScore] = useState(0)
   const [attempt, setAttempt] = useState(0)
+  const [count, setCount] = useState(60)
+  const timeRef = useRef(null)
 
   const data = [
     {
@@ -68,14 +70,15 @@ const MemoryGame = () => {
     setScore(0)
     setTurn(0)
     setAttempt(0)
+    setCount(60)
   }
+
+
 
   const endGame = () => {
     setDataArr([])
-    setTurnOne(null);
-    setTurnTwo(null);
-    setDisabled(false)
-    
+    clearInterval(timeRef.current)
+   
   }
 
   const handleFlip = (card) => {
@@ -89,6 +92,13 @@ const MemoryGame = () => {
     }
     setTurn((prev) => prev + 1);
   };
+
+useEffect(()=>{
+   if(!count){
+    setDataArr([])
+   }
+
+},[count])
 
   useEffect(() => {
 
@@ -107,27 +117,30 @@ const MemoryGame = () => {
       }
     }
   }, [turnOne, turnTwo]);
+
+
   const handleReset = () => {
     setTurnOne(null);
     setTurnTwo(null);
     setDisabled(false)
     setAttempt((prev) => prev + 1)
-
   };
+
 
   return (
     <div style={{display:'flex', justifyContent:"center",  }}>
       <div >
         <button onClick={startGame}>{!dataArr?.length? "Start" : 'ReStart' } </button>
-        {/* <Count /> */}
-       {dataArr?.length? <div className="headerInfo">
+       
+       <div className="headerInfo">
+         <div> <Count count={count} setCount={setCount} timeRef={timeRef} /></div>
          <p> Score : {score}</p>
           {' '}
          <p> Clicked: {turn}</p>
           {''}
           <p>Attempt: {attempt}</p>
           <button onClick={endGame}>End</button>
-        </div> :' '}
+        </div>
         <div className="card-grid">
           {dataArr?.map((item, i) => {
             return <View
