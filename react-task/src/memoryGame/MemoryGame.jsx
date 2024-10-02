@@ -65,16 +65,18 @@ const MemoryGame = () => {
     ];
     const shuffledArray = duplicateArr.sort(() => Math.random() - 0.5);
     setDataArr(shuffledArray);
+    setScore(0)
+    setTurn(0)
+    setAttempt(0)
   }
 
   const endGame = () => {
     setDataArr([])
-    handleReset()
+    setTurnOne(null);
+    setTurnTwo(null);
+    setDisabled(false)
+    
   }
-
-  // useEffect(() => {
-  //   startGame()
-  // }, []);
 
   const handleFlip = (card) => {
     if (turnOne) {

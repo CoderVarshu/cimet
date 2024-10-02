@@ -13,8 +13,8 @@ function App() {
       {/* <AvatarApp /> */}
       {/* <DotApp /> */}
       {/* <ToDoApp /> */}
-      <AutoComplete />
-       {/* <MemoryGame /> */}
+      {/* <AutoComplete /> */}
+       <MemoryGame />
     </>
   )
 }
