@@ -11,13 +11,13 @@ import View from "./view";
 import Count from "./Count";
 
 const MemoryGame = () => {
-  const [flippedCards, setFlippedCard] = useState([]);
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [disabled, setDisabled] = useState(false)
   const [dataArr, setDataArr] = useState([]);
   const [turn, setTurn] = useState(0);
   const [turnOne, setTurnOne] = useState(null);
   const [turnTwo, setTurnTwo] = useState(null);
   const [score, setScore] = useState(0)
+  const [attempt, setAttempt] = useState(0)
 
   const data = [
     {
@@ -58,14 +58,23 @@ const MemoryGame = () => {
     },
   ];
 
-  useEffect(() => {
+  const startGame = () => {
     const duplicateArr = [
       ...data,
       ...data.map((el) => ({ ...el, id: el.id + 6 })),
     ];
     const shuffledArray = duplicateArr.sort(() => Math.random() - 0.5);
     setDataArr(shuffledArray);
-  }, []);
+  }
+
+  const endGame = () => {
+    setDataArr([])
+    handleReset()
+  }
+
+  // useEffect(() => {
+  //   startGame()
+  // }, []);
 
   const handleFlip = (card) => {
     if (turnOne) {
@@ -82,6 +91,7 @@ const MemoryGame = () => {
   useEffect(() => {
 
     if (turnOne && turnTwo) {
+      setDisabled(true)
       if (turnOne.name === turnTwo.name) {
         // setDataArr( (card) => card.map((el) => el.name == turnOne.name ? { ...el, matches: true } : el))
         setScore((prev) => prev + 1)
@@ -92,30 +102,43 @@ const MemoryGame = () => {
           setDataArr(dataArr.map((card) => card.id == turnTwo.id || card.id == turnOne.id ? { ...card, matches: false } : card))
           handleReset()
         }, 1000)
-
       }
     }
-
   }, [turnOne, turnTwo]);
-  console.log("else in useEffect", dataArr)
   const handleReset = () => {
     setTurnOne(null);
     setTurnTwo(null);
+    setDisabled(false)
+    setAttempt((prev) => prev + 1)
+
   };
 
   return (
-    <div className="card-grid">
-      <Count />
-      Score : {score}
-      Clicked: {turn}
-      {dataArr?.map((item, i) => {
-        return <View
-          key={item.id}
-          data={item}
-          handleFlip={handleFlip}
-        //  flipped={item === turnOne || item === turnTwo ||  item.macted}
-        />;
-      })}
+    <div style={{display:'flex', justifyContent:"center",  }}>
+      <div >
+        <button onClick={startGame}>{!dataArr?.length? "Start" : 'ReStart' } </button>
+        {/* <Count /> */}
+       {dataArr?.length? <div className="headerInfo">
+         <p> Score : {score}</p>
+          {' '}
+         <p> Clicked: {turn}</p>
+          {''}
+          <p>Attempt: {attempt}</p>
+          <button onClick={endGame}>End</button>
+        </div> :' '}
+        <div className="card-grid">
+          {dataArr?.map((item, i) => {
+            return <View
+              key={item.id}
+              data={item}
+              handleFlip={handleFlip}
+              disabled={disabled}
+            //  flipped={item === turnOne || item === turnTwo ||  item.macted}
+            />;
+          })}
+        </div>
+      </div>
+
     </div>
   );
 };

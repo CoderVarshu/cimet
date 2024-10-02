@@ -2,11 +2,13 @@
 import backImg from "./imges/defaultImage.jpg";
 import './style.css'
 
-const View = ({ data, handleFlip, flipped }) => {
+const View = ({ data, handleFlip, disabled }) => {
 
 
   const handleClick = () => {
-    handleFlip(data)
+    if(!disabled){
+   handleFlip(data)
+    }
   }
 
   return (
