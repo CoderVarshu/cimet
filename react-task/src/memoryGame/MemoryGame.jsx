@@ -1,77 +1,146 @@
-import React, { useEffect, useState } from 'react'
-import blackBird from './imges/BlackBird.png'
-import blueBird from './imges/blueBird.png';
-import dualBird from './imges/dualBirds.png'
-import orangeBird from './imges/orangeBird.png'
-import whiteBird from './imges/whiteBird.png'
-import banana from './imges/banana.png'
-import apple from './imges/apple.png'
-import './style.css';
-import View from './view';
-import Count from './Count';
-
+import { useEffect, useState } from "react";
+import blackBird from "./imges/BlackBird.png";
+import blueBird from "./imges/blueBird.png";
+import dualBird from "./imges/dualBirds.png";
+import orangeBird from "./imges/orangeBird.png";
+import whiteBird from "./imges/whiteBird.png";
+import banana from "./imges/banana.png";
+import apple from "./imges/apple.png";
+import "./style.css";
+import View from "./view";
+import Count from "./Count";
 
 const MemoryGame = () => {
-    const [flippedArr, setFlippedArr] = useState([])
-    const [isFlipped, setIsFlipped] = useState(false)
-    const [dataArr, setDataArr] = useState([])
+  const [disabled, setDisabled] = useState(false)
+  const [dataArr, setDataArr] = useState([]);
+  const [turn, setTurn] = useState(0);
+  const [turnOne, setTurnOne] = useState(null);
+  const [turnTwo, setTurnTwo] = useState(null);
+  const [score, setScore] = useState(0)
+  const [attempt, setAttempt] = useState(0)
 
-    const data = [
-        {
-            name: 'white',
-            id: 1,
-            image: whiteBird
-        },
-        {
-            name: 'banana',
-            id: 2,
-            image: banana
-        },
-        {
-            name: 'dualBird',
-            id: 3,
-            image: dualBird
-        },
-        {
-            name: 'blueBird',
-            id: 4,
-            image: blueBird
-        },
-        {
-            name: 'orangeBird',
-            id: 5,
-            image: orangeBird
-        },
-        {
-            name: 'apple',
-            id: 6,
-            image: apple
-        },
-    ]
+  const data = [
+    {
+      name: "white",
+      id: 1,
+      image: whiteBird,
+      matches: false,
+    },
+    {
+      name: "blackBird",
+      id: 2,
+      image: blackBird,
+      matches: false,
+    },
+    {
+      name: "dualBird",
+      id: 3,
+      image: dualBird,
+      matches: false,
+    },
+    {
+      name: "blueBird",
+      id: 4,
+      image: blueBird,
+      matches: false,
+    },
+    {
+      name: "orangeBird",
+      id: 5,
+      image: orangeBird,
+      matches: false,
+    },
+    {
+      name: "apple",
+      id: 6,
+      image: apple,
+      matches: false,
+    },
+  ];
 
-    useEffect(()=>{
-        const duplicateArr = [...data, ...data.map((el)=>{})]
-        const shuffledArray = duplicateArr.sort(() => Math.random() - 0.5);
-        setDataArr(shuffledArray)
-    }, [])
+  const startGame = () => {
+    const duplicateArr = [
+      ...data,
+      ...data.map((el) => ({ ...el, id: el.id + 6 })),
+    ];
+    const shuffledArray = duplicateArr.sort(() => Math.random() - 0.5);
+    setDataArr(shuffledArray);
+  }
 
+  const endGame = () => {
+    setDataArr([])
+    handleReset()
+  }
 
-    const handleFlip = (id) => {
-        console.log("i am running")
-        setFlippedArr([...flippedArr, id])
+  // useEffect(() => {
+  //   startGame()
+  // }, []);
+
+  const handleFlip = (card) => {
+    if (turnOne) {
+      setTurnTwo(card)
+      setDataArr(dataArr.map((el) => el.id == card.id ? { ...el, matches: true } : el))
     }
+    else {
+      setTurnOne(card)
+      setDataArr(dataArr.map((el) => el.id == card.id ? { ...el, matches: true } : el))
+    }
+    setTurn((prev) => prev + 1);
+  };
 
-    return (
+  useEffect(() => {
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', margin: '20px', width: '80%', justifyContent: 'center', }}>
-            {/* <Count /> */}
-            {dataArr?.map((item, i) => {
-                return (
-                    <View key={i} data={item} id={i} handleFlip={handleFlip} flippedArr={flippedArr} />
-                )
-            })}
+    if (turnOne && turnTwo) {
+      setDisabled(true)
+      if (turnOne.name === turnTwo.name) {
+        // setDataArr( (card) => card.map((el) => el.name == turnOne.name ? { ...el, matches: true } : el))
+        setScore((prev) => prev + 1)
+        handleReset()
+      }
+      else {
+        setTimeout(() => {
+          setDataArr(dataArr.map((card) => card.id == turnTwo.id || card.id == turnOne.id ? { ...card, matches: false } : card))
+          handleReset()
+        }, 1000)
+      }
+    }
+  }, [turnOne, turnTwo]);
+  const handleReset = () => {
+    setTurnOne(null);
+    setTurnTwo(null);
+    setDisabled(false)
+    setAttempt((prev) => prev + 1)
+
+  };
+
+  return (
+    <div style={{display:'flex', justifyContent:"center",  }}>
+      <div >
+        <button onClick={startGame}>{!dataArr?.length? "Start" : 'ReStart' } </button>
+        {/* <Count /> */}
+       {dataArr?.length? <div className="headerInfo">
+         <p> Score : {score}</p>
+          {' '}
+         <p> Clicked: {turn}</p>
+          {''}
+          <p>Attempt: {attempt}</p>
+          <button onClick={endGame}>End</button>
+        </div> :' '}
+        <div className="card-grid">
+          {dataArr?.map((item, i) => {
+            return <View
+              key={item.id}
+              data={item}
+              handleFlip={handleFlip}
+              disabled={disabled}
+            //  flipped={item === turnOne || item === turnTwo ||  item.macted}
+            />;
+          })}
         </div>
-    )
-}
+      </div>
 
-export default MemoryGame
+    </div>
+  );
+};
+
+export default MemoryGame;

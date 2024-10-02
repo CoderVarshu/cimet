@@ -47,7 +47,8 @@ const AutoComplete = () => {
             const getSuggestion = suggestions.filter((item) => (item.toLowerCase().includes(newValue[1].toLowerCase())))
             setNewSuggestion(getSuggestion)
         }
-        else {setNewSuggestion([])
+        else {
+            setNewSuggestion([])
             setActive(false)
         }
     }
@@ -57,13 +58,13 @@ const AutoComplete = () => {
         if (value.includes('@')) {
             const check = value.split('@')
             setActive(true)
-            if (e.key === 'Enter' || e.key==='ArrowRight') {
+            if (e.key === 'Enter' || e.key === 'ArrowRight') {
                 if (currentSuggestion >= 0 && newSuggestion[currentSuggestion]) {
                     setUpi(`${check[0]}@${newSuggestion[currentSuggestion]}`);
                 }
                 else if (newSuggestion.length > 0) setUpi(check[0] + '@' + newSuggestion[0])
                 setNewSuggestion([]);
-                 setActive(false)
+                setActive(false)
             }
             else if (e.key === 'ArrowDown') {
                 if (currentSuggestion < newSuggestion.length - 1) {
@@ -80,7 +81,7 @@ const AutoComplete = () => {
                 }
             }
         }
-          if(newSuggestion.length > 0) {currentRef.current.scrollIntoView(true)}
+        if (newSuggestion.length > 0) { currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' }) }
     }
 
     const handleSelect = (selectedText) => {
@@ -102,24 +103,25 @@ const AutoComplete = () => {
                     onKeyUp={handleDropDown}
                     className='showInput'
                 />
-                <input 
-                 value={active ? `${upi.split('@')[0]}@${ newSuggestion.length ? newSuggestion[0] :''}` :''}
-                className='hiddenInput'
-                disabled={true}
+                <input
+                    value={active ? `${upi.split('@')[0]}@${newSuggestion.length ? newSuggestion[0] : ''}` : ''}
+                    className='hiddenInput'
+                    disabled={true}
                 />
             </div>
             <div className='sugestionDropDownWrapper'>
-                {newSuggestion && newSuggestion.map((item, i) =>
-                (
-                    <ui
+                <ul>
+                    {newSuggestion && newSuggestion.map((item, i) =>
+                    (
+                        <li 
                         className={`sugestionDropDown ${i === currentSuggestion ? 'active' : ''}`}
                         key={i}
                         onClick={() => handleSelect(item)}
-                       
-                    >
-                      <li key={i}  ref = {i === currentSuggestion? currentRef : null} >  {`@${item}`} </li>
-                    </ui>
-                ))}
+                        ref={i === currentSuggestion ? currentRef : null} >  {`@${item}`}
+                         
+                         </li>
+                    ))}
+                </ul>
             </div>
         </div>
     )
