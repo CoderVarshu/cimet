@@ -4,10 +4,9 @@ import blueBird from "./imges/blueBird.png";
 import dualBird from "./imges/dualBirds.png";
 import orangeBird from "./imges/orangeBird.png";
 import whiteBird from "./imges/whiteBird.png";
-import banana from "./imges/banana.png";
 import apple from "./imges/apple.png";
 import "./style.css";
-import View from "./view";
+import View from "./View";
 import Count from "./Count";
 
 const MemoryGame = () => {
@@ -116,7 +115,7 @@ useEffect(()=>{
         }, 1000)
       }
     }
-  }, [turnOne, turnTwo]);
+  }, [turnOne, turnTwo, dataArr]);
 
 
   const handleReset = () => {
@@ -142,7 +141,7 @@ useEffect(()=>{
           <button onClick={endGame}>End</button>
         </div>
         <div className="card-grid">
-          {dataArr?.map((item, i) => {
+          {dataArr?.map((item) => {
             return <View
               key={item.id}
               data={item}
