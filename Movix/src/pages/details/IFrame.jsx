@@ -11,7 +11,7 @@ const IFrame = ({mediaType, id}) => {
     const trailorObj = data?.results.find(item => item.type === 'Trailer')
      setTrailor(trailorObj)
   }
-
+  
    useEffect(()=>{
     getTrailor()
    }, [mediaType, id])
