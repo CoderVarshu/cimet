@@ -2,12 +2,15 @@ import React, { useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
 import { fetchCurrencyConversion } from '../services/Api'
+import { createCurrencyContext } from '../context/CurrencyConversContext'
 
 const Header = () => {
 
+    const {currency, convertCurrency} = useContext(createCurrencyContext)
+    
     const getCurrency =async()=>{
-        const response = await fetchCurrencyConversion()
-        console.log("first", response)
+        const {INR,AUD} = await fetchCurrencyConversion()
+         convertCurrency({INR,AUD})
     }
 
     useEffect(()=>{
@@ -33,7 +36,10 @@ const Header = () => {
                         </NavLink>
                     </li>
                     <li>
-                       <select>
+                       <select className='bg-blue-gray-800' >
+                        <option value="INR"> INR </option>
+                        <option value="AUD"> AUD </option>
+                        <option value="USD"> USD </option>
                         </select> 
                     </li>
                     <li>
