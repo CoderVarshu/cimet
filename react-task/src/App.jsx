@@ -1,20 +1,23 @@
 // import App from './circles/Components/App'
+import AgeCalculator from './ageCalculator/AgeCalculator'
 import './App.css'
-import AutoComplete from './autoComplete/component/AutoComplete'
-import MemoryGame from './memoryGame/MemoryGame'
+// import AutoComplete from './autoComplete/component/AutoComplete'
+// import MemoryGame from './memoryGame/MemoryGame'
 // import AvatarApp from './avatar/Components/App'
-import DotApp from './circles/Components/App'
-import ToDoApp from './ToDoList/Components/App'
+// import DotApp from './circles/Components/App'
+// import ToDoApp from './ToDoList/Components/App'
 
 function App() {
 
-  return (
+  return (                      
     <>
       {/* <AvatarApp /> */}
       {/* <DotApp /> */}
       {/* <ToDoApp /> */}
       {/* <AutoComplete /> */}
-       <MemoryGame />
+       {/* <MemoryGame /> */}
+       <AgeCalculator />
+
     </>
   )
 }
