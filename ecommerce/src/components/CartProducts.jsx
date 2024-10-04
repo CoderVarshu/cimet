@@ -13,7 +13,7 @@ const CartProducts = () => {
             {cart.length ?
                <> 
                <div className="flex flex-wrap  w-9/12">  {cart.map((el, i) =><ProductCard key={i} data={el.product} />)}</div>
-               <div className="mt-28"> <CartTotal cart={cart} /></div>
+               <div className="mt-2"> <CartTotal cart={cart} /></div>
                </>
                 : <img
                     src={NoDataFound}

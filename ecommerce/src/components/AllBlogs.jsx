@@ -16,6 +16,8 @@ const AllBlogs = () => {
      useEffect(()=>{
       setSearchParams({"page":(start/10)+1})
      },[start])
+
+     
   return (
     <div >
       <div className='flex justify-center flex-wrap'>
