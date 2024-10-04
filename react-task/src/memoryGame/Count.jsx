@@ -2,7 +2,6 @@ import { useEffect } from "react";
 
 const Count = ({count, setCount, timeRef}) => {
 
- console.log("TIMER", timeRef)
 
   useEffect(() => {
     timeRef.current = setInterval(() => {
