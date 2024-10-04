@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
 import { fetchCurrencyConversion } from '../services/Api'
-import { createCurrencyContext } from '../context/CurrencyConversContext'
+import { currencyContext } from '../context/CurrencyConversContext'
 
 const Header = () => {
+    const {handleSetCurrency, convertCurrency, currentCurr, currency} = useContext(currencyContext)
+    const {cart} = useContext(CartContext)
 
-    const {currency, convertCurrency} = useContext(createCurrencyContext)
-    
     const getCurrency =async()=>{
         const {INR,AUD} = await fetchCurrencyConversion()
          convertCurrency({INR,AUD})
@@ -16,8 +16,6 @@ const Header = () => {
     useEffect(()=>{
        getCurrency()
     }, [])
- 
-    const {cart} = useContext(CartContext)
 
     return (
         <header>
@@ -36,10 +34,10 @@ const Header = () => {
                         </NavLink>
                     </li>
                     <li>
-                       <select className='bg-blue-gray-800' >
+                       <select className='bg-blue-gray-800' onChange={(e)=>handleSetCurrency(e.target.value)} >
+                        <option value="USD"> USD </option>
                         <option value="INR"> INR </option>
                         <option value="AUD"> AUD </option>
-                        <option value="USD"> USD </option>
                         </select> 
                     </li>
                     <li>

@@ -1,4 +1,3 @@
-import { useLoaderData } from "react-router-dom"
 import FeaturedProducts from "../components/FeaturedProducts"
 import Slider from "../components/Slider"
 

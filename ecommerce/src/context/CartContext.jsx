@@ -1,6 +1,5 @@
-import { stringify } from "postcss";
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
-import { json } from "react-router-dom";
 
 
 export const CartContext = createContext()
