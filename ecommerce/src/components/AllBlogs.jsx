@@ -1,13 +1,21 @@
-import { useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useLoaderData, useSearchParams } from 'react-router-dom'
 import BlogCard from './BlogCard'
 import Pagination from './Pagination'
 
 const AllBlogs = () => {
    
     const data = useLoaderData()
-     const [start, setStart] = useState(0)
+    let [searchParams, setSearchParams] = useSearchParams();
+    let startPage=Number(searchParams.get("page"))||0
 
+    if(startPage){
+      startPage=(startPage-1)*10
+    }
+     const [start, setStart] = useState(startPage)
+     useEffect(()=>{
+      setSearchParams({"page":(start/10)+1})
+     },[start])
   return (
     <div >
       <div className='flex justify-center flex-wrap'>

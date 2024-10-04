@@ -2,7 +2,6 @@
 
 const Pagination = ({ start, setStart }) => {
   const arr = new Array(10).fill(0).map((el, i) => (el = i + 1));
-  console.log(arr);
 
   return (
     <div>

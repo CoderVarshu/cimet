@@ -5,6 +5,7 @@ import Wrapper from "../pages/Wrapper"
 import { fetchApi } from "../services/Api"
 import CartProducts from "../components/CartProducts"
 import AllBlogs from "../components/AllBlogs"
+import SingleBlog from "../components/SingleBlog"
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
                         index: true,
                         element: <AllBlogs />,
                         loader: () => fetchApi('https://jsonplaceholder.typicode.com/posts'),
+                    },
+                    {
+                        path:':id',
+                        element: <SingleBlog />,
+                        loader: (e)=> fetchApi(`https://jsonplaceholder.typicode.com/posts/${e.params.id}`)
                     }
                 ]
             },
@@ -36,7 +42,6 @@ const router = createBrowserRouter([
                 path: '/cart',
                 element: <CartProducts />,
             },
-
         ]
     },
     {

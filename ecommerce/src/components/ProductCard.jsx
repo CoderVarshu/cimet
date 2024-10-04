@@ -13,13 +13,13 @@ const ProductCard = ({ data }) => {
 
   const handlePrice = (price) => {
     let keys = Object.keys(currentCurr);
-    console.log("KK", keys[0])
   if (keys[0] === 'USD') {
     setConvertedPrice(price);
   } else {
       let convertedRate = (price * currentCurr[keys[0]]).toFixed(2);
       setConvertedPrice(convertedRate);
   }
+
   if (keys[0] === "INR") setSymbol("₹");
   else if (keys[0] === "AUD") setSymbol("AU$");
   else setSymbol("$");

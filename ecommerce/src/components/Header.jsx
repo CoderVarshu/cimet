@@ -19,7 +19,7 @@ const Header = () => {
 
     return (
         <header>
-            <nav className='flex justify-between bg-gray-800 text-white font-bold px-5 py-4 mb-0'>
+            <nav className='flex justify-between bg-blue-gray-500 text-white font-bold px-5 py-4 mb-0'>
                 <div>
                     <h1>
                         <NavLink to='/'>
@@ -34,7 +34,7 @@ const Header = () => {
                         </NavLink>
                     </li>
                     <li>
-                       <select className='bg-blue-gray-800' onChange={(e)=>handleSetCurrency(e.target.value)} >
+                       <select className='bg-blue-gray-500' onChange={(e)=>handleSetCurrency(e.target.value)} >
                         <option value="USD"> USD </option>
                         <option value="INR"> INR </option>
                         <option value="AUD"> AUD </option>
