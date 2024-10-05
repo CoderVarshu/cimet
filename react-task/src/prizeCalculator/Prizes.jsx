@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, } from "react"
 
 const Prizes = () => {
 const awards = [
@@ -34,6 +34,19 @@ function calculatePrize(data){
         return acc
   },{})
   console.log("ARR", arr)
+
+  Object.keys(arr).forEach(category => {
+    Object.keys(arr[category]).forEach(year=>{
+      const teams = {};
+      arr[category][year].forEach(winner=>{
+          console.log("CATEGORY", category, year, winner)
+            if(!teams[winner.team]){
+              teams[winner.teams] = []
+            }
+            teams[winner.team]
+        })
+    })
+  })
       
 }
 

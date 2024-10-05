@@ -14,6 +14,7 @@ const CartTotal = ({ cart }) => {
     if (cart) {
       total()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCurr, cart])
 
   const total = () => {
@@ -60,7 +61,7 @@ const CartTotal = ({ cart }) => {
       <div className="flex justify-center font-black"> Total Orders </div>
         {cart.map((data) => {
             return (
-              <div className="border-x-transparent border-b-2 p-2">
+              <div key={data.id} className="border-x-transparent border-b-2 p-2">
                 <h3>  Title : {data.product.title}</h3>
                 <h3>  Qty: {data.quantity}</h3>
                 <h3>  Price : {symbol} {handleShowPrice(data.product.price)}</h3>
