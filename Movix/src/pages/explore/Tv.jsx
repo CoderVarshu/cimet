@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import ContentWrapper from "../../components/contentWrapper/contentWrapper"
 
 const Tv = () => {
