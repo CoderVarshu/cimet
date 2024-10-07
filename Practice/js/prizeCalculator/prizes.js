@@ -1,4 +1,3 @@
-
 const awards = [
   {
     name: "James Peebles",
@@ -74,76 +73,64 @@ const awards = [
   },
 ];
 
-function CalculatePrizes(awards) {
+function CalculatePrizes(award) {
+  const awards = award.sort((a, b) => b.year - a.year);
 
   let prizeDistribution = {};
   let result = [];
 
+  awards.forEach((ele) => {
+    const { category, year, team, name } = ele;
 
-  awards.forEach(ele => {
-    const { category, year, team, name } = ele
-
-    key = category + "-" + year
+    key = category + "-" + year;
 
     if (!prizeDistribution[key]) {
       prizeDistribution[key] = {
         category: category,
         year: year,
-        teams: {}
-      }
+        teams: {},
+      };
     }
     if (!prizeDistribution[key].teams[team]) {
       prizeDistribution[key].teams[team] = {
         winners: [],
         winnerCount: 0,
-      }
+      };
     }
     prizeDistribution[key].teams[team].winners.push(name);
     prizeDistribution[key].teams[team].winnerCount += 1;
-
   });
 
-  for (let key in prizeDistribution) {
+  for (let categoryYearKey in prizeDistribution) {
+    const categoryYearData = prizeDistribution[categoryYearKey];
+    const { category, year, teams } = categoryYearData;
 
-    categoryYearData = prizeDistribution[key];
-    category = categoryYearData.category
-    year = categoryYearData.year
-      
+    let totalTeams = Object.keys(teams).length;
+    let sharePerTeam = 1 / totalTeams;
+    let winnerArr = [];
+
+    for (let teamKey in teams) {
+      const teamData = teams[teamKey];
+      const { winners, winnerCount } = teamData;
+      const sharePerWinner = sharePerTeam / winnerCount;
+
+      winners.forEach((element) => {
+        winnerArr.push({
+          name: element,
+          share: parseFloat(sharePerWinner.toFixed(2)),
+        });
+      });
+    }
+
+    // console.log("Winner", winnerArr)
+
+    result.push({
+      category: category,
+      year: year,
+      winners: winnerArr,
+    });
   }
-
-  totalTeams = Object.keys(categoryYearData.teams).length
-  sharePerTeam = 1 / totalTeams
-
-  for (let key in categoryYearData.teams) {
-
-    teamData = categoryYearData.teams[key]
-    team = categoryYearData.teams
-    winners = teamData.winners
-    winnersCount = teamData.winnerCount
-    sharePerWinner = sharePerTeam / winnersCount
-
-  }
-
-  let winnerArr = []
-
-  winners.forEach(element => {
-    console.log(element)
-    winnerArr.push([{
-      name:  element,
-      share: sharePerWinner
-    }])
-  });
-
-  console.log("Winner", ...winnerArr)
-
-  result.push({
-    category: category,
-    year: year,
-    winners: winnerArr
-  })
-
-  // console.log(result)
-  // return result
+  return JSON.stringify(result, null, 2);
 }
 
-CalculatePrizes(awards)
+console.log((CalculatePrizes(awards)));
