@@ -66,7 +66,7 @@ const InputCard = ({handleSearch}) => {
       </div>
      
       <button className="bg-gray-800 px-5 py-1 rounded-md text-white" onClick={handleSubmit}>
-        Submit
+        Generate Image
       </button>
     </div>
     </form>
