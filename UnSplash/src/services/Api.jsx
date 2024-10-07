@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// const SECRET_KEY = "CKANt6ntezU44spif2n6iOU8Qmsjnqxw6F9OhA5dWiI";
-const ACCESS_KEY = "FQhFiQhIojfM626r3fnNI9YQtrCfdCUAcwRvawWKLco";
-const pre_Url = "https://api.unsplash.com";
+const ACCESS_KEY =  import.meta.env.VITE_ACCESS_KEY;
+console.log("KEY", ACCESS_KEY)
+const pre_Url = "https://api.unsplash.com"
 
 export const fetchApi = async ({
   query,

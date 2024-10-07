@@ -27,7 +27,7 @@ const Wrapper = () => {
         </div>
       }
       <div className="flex justify-center">
-        {loading && "Loading... " }
+        {loading && "Loading Images... " }
       </div>
     </div>
   ); 

@@ -1,0 +1,43 @@
+class TaskRunner:
+    constructor(concurrency):
+        // Initialize the concurrency limit and the task queue
+        this.concurrency = concurrency
+        this.runningTasks = 0
+        this.taskQueue = []
+
+    method push(task):
+        // Add the task to the queue
+        this.taskQueue.append(task)
+        // Attempt to run tasks
+        this.runNext()
+
+    method runNext():
+        // If there are no more tasks in the queue, return
+        if this.taskQueue is empty:
+            return
+
+        // If the number of running tasks is less than the concurrency limit
+        if this.runningTasks < this.concurrency:
+            // Dequeue the next task
+            task = this.taskQueue.pop(0)
+            // Increment the count of running tasks
+            this.runningTasks += 1
+            
+            // Execute the task
+            this.executeTask(task)
+
+    method executeTask(task):
+        // Run the task asynchronously
+        task().then(() => {
+            // Decrement the count of running tasks when the task is done
+            this.runningTasks -= 1
+            // Run the next task in the queue
+            this.runNext()
+        }).catch((error) => {
+            // Handle any errors that occur during task execution
+            console.error(error)
+            // Decrement the count of running tasks on error as well
+            this.runningTasks -= 1
+            // Run the next task in the queue
+            this.runNext()
+        })

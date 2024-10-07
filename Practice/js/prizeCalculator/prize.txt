@@ -1,0 +1,67 @@
+function calculatePrizes(awards):
+    // Initialize a structure to hold the prize distribution
+    prizeDistribution = {}
+
+    // Loop through each award entry in the awards array
+    for each award in awards:
+        // Extract the necessary details
+        category = award.category
+        year = award.year
+        team = award.team
+        winnerName = award.name
+
+        // Create a unique key for each category and year combination
+        key = category + "-" + year
+
+        // If the key does not exist in prizeDistribution, initialize it
+        if key not in prizeDistribution:
+            prizeDistribution[key] = {
+                category: category,
+                year: year,
+                teams: {}
+            }
+
+        // If the team does not exist, initialize it in the teams dictionary
+        if team not in prizeDistribution[key].teams:
+            prizeDistribution[key].teams[team] = {
+                winners: [],
+                winnerCount: 0
+            }
+
+        // Add the winner to the team's list and increment the count
+        prizeDistribution[key].teams[team].winners.append(winnerName)
+        prizeDistribution[key].teams[team].winnerCount += 1
+
+    // Initialize an array to hold the final output
+    result = []
+
+    // Loop through each category and year in prizeDistribution
+    for each key in prizeDistribution:
+        categoryYearData = prizeDistribution[key]
+        category = categoryYearData.category
+        year = categoryYearData.year
+        totalTeams = length of categoryYearData.teams
+        sharePerTeam = 1 / totalTeams
+
+        // Loop through each team to calculate winners' shares
+        for each team in categoryYearData.teams:
+            teamData = categoryYearData.teams[team]
+            teamWinners = teamData.winners
+            winnerCount = teamData.winnerCount
+            sharePerWinner = sharePerTeam / winnerCount
+
+            // Loop through each winner to create the final winner objects
+            for each winner in teamWinners:
+                result.append({
+                    name: winner,
+                    share: sharePerWinner
+                })
+
+        // Append the category and year with winners to the result
+        result.append({
+            category: category,
+            year: year,
+            winners: result // Current list of winners for this category and year
+        })
+
+    return result

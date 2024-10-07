@@ -76,50 +76,50 @@ const Prizes = () => {
     },
   ];
 
-  useEffect(() => {
-    data();
-  }, []);
+  // const data = () => {
+  //   let sortedArr = awards.sort((a, b) => Number(a.year - b.year));
+  //   calculatePrize(sortedArr);
+  // };
 
-  const data = () => {
-    let sortedArr = awards.sort((a, b) => Number(a.year - b.year));
-    calculatePrize(sortedArr);
-  };
+  // function calculatePrize(data) {
+  //   const arr = data.reduce((acc, el) => {
+  //     acc[el.category] = acc[el.category] || [];
+  //     acc[el.category][el.year] = acc[el.category][el.year] || [];
+  //     acc[el.category][el.year].push(el);
+  //     return acc;
+  //   }, {});
 
-  function calculatePrize(data) {
-    const arr = data.reduce((acc, el) => {
-      acc[el.category] = acc[el.category] || [];
-      acc[el.category][el.year] = acc[el.category][el.year] || [];
-      acc[el.category][el.year].push(el);
-      return acc;
-    }, {});
-    console.log("ARR", arr);
+  //   Object.keys(arr).forEach((category) => {
+  //     Object.keys(arr[category]).forEach((year) => {
+  //       const teams = {};
+  //       arr[category][year].forEach((winner) => {
+  //         if (!teams[winner.team]) {
+  //           teams[winner.teams] = [];
+  //         }
+  //         teams[winner.team].push(winner.name);
+  //       });
+  //       console.log("CATEGORY", teams);
+  //       const teamCount = Object.keys(teams).length;
+  //       const prizePerTeam = 1 / teamCount;
 
-    Object.keys(arr).forEach((category) => {
-      Object.keys(arr[category]).forEach((year) => {
-        const teams = {};
-        arr[category][year].forEach((winner) => {
-          if (!teams[winner.team]) {
-            teams[winner.teams] = [];
-          }
-          teams[winner.team].push(winner.name);
-        });
-        // console.log("CATEGORY", teams);
-        // const teamCount = Object.keys(teams).length;
-        // const prizePerTeam = 1 / teamCount;
+  //       const winners = [];
+  //       Object.keys(teams).forEach(team=>{
+  //         const teamMember = teams[team];
+  //         console.log("TEAM", teamMember)
 
-        // const winners = [];
-        // Object.keys(teams).forEach(team=>{
-        //   const teamMember = teams[team];
-        //   console.log("TEAM", teamMember)
-
-        //   const prizePerWinner = prizePerTeam / teamMember.length;
+  //         const prizePerWinner = prizePerTeam / teamMember.length;
            
            
-        // })
+  //       })
 
-      });
-    });
-  }
+  //     });
+  //   });
+  // }
+
+
+// const 
+// 
+
 
   return <div>Prizes</div>;
 };
