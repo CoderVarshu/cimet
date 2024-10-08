@@ -9,44 +9,54 @@ import { useEffect, useState } from "react";
 
 const Carousel = ({ images }) => {
   const [current, setCurrent] = useState(0);
+  const extendedImages = [...images, images[0]];
 
   useEffect(() => {
-    const autoSlide =  setInterval(() => {
-        lastSlide();
-      }, 3000);
+    const autoSlide = setInterval(() => {
+      lastSlide();
+    }, 3000);
 
-    return () => {clearInterval(autoSlide)};
+    return () => {
+      clearInterval(autoSlide);
+    };
   }, [current]);
 
   let prevSlide = () => {
-    if (current === 0) setCurrent(images.length - 1);
+    if (current === 0) setCurrent(extendedImages.length - 2);
     else setCurrent(current - 1);
   };
   let lastSlide = () => {
-    if (current === images.length - 1) setCurrent(0);
-    else setCurrent(current + 1);
+    if (current === extendedImages.length - 1) {
+      setCurrent(0);
+    }
+    else {setCurrent(current + 1)};
   };
 
   return (
     <div className="overflow-hidden relative w-full">
       <div
         className="flex transition ease-out duration-400"
-        style={{ transform: `translateX(-${current * 100}%)` }}
+        style={{
+          transform: `translateX(-${current * 100}%)`,
+          transition:
+            current === images.length ? "none" : "transform 0.4s ease-out",
+        }}
       >
-        {images.map((data) => (
-          <ImagesCard key={data.id} images={data} />
+        {extendedImages.map((data, index) => (
+          <ImagesCard key={data.id || index} images={data} />
         ))}
       </div>
       <div className="shadow absolute top-0 h-full w-full flex justify-between items-center text-white px-5 text-3xl">
-        <button onClick={prevSlide}
-         className="bg-gray-800 bg-opacity-50 p-1 rounded-full hover:bg-opacity-70 transition "
+        <button
+          onClick={prevSlide}
+          className="bg-gray-800 bg-opacity-50 p-1 rounded-full hover:bg-opacity-70 transition "
         >
           {" "}
           <BsFillArrowLeftCircleFill />{" "}
         </button>
-        <button onClick={lastSlide}
-         className="bg-gray-800 bg-opacity-50 p-1 rounded-full hover:bg-opacity-70 transition "
-         
+        <button
+          onClick={lastSlide}
+          className="bg-gray-800 bg-opacity-50 p-1 rounded-full hover:bg-opacity-70 transition "
         >
           {" "}
           <BsFillArrowRightCircleFill />{" "}
