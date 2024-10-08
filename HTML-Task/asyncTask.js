@@ -9,9 +9,11 @@ class TaskRunner {
   
     push(task) {
       // write your code below
-
       this.thisQueue.append(task)
-      
+      this.runNext()
+    }
 
+    runNext(){
+      
     }
   }
