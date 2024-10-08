@@ -13,11 +13,8 @@ const InputCard = ({handleSearch}) => {
     e.preventDefault()
       handleSearch({query, isRandom, orientation, limit, page})
   }
-
-
   return (
     <form 
-    // onSubmit={handleSubmit}
     >
     <div className="flex justify-center flex-col h-96  gap-4 items-center">
          <div className="w-1/2">

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 const Carousel = ({ images }) => {
   const [current, setCurrent] = useState(0);
-  const extendedImages = [...images, images[0]];
+  const extendedImages = [images[images.length-1], ...images, images[0]];
 
   useEffect(() => {
     const autoSlide = setInterval(() => {
@@ -22,14 +22,17 @@ const Carousel = ({ images }) => {
   }, [current]);
 
   let prevSlide = () => {
-    if (current === 0) setCurrent(extendedImages.length - 2);
-    else setCurrent(current - 1);
+   setCurrent((prev)=> (prev === 0 ? extendedImages.length -2 : prev - 1 ) )
+    // if (current === 0) setCurrent(extendedImages.length - 2);
+    // else setCurrent(current - 1);
   };
   let lastSlide = () => {
-    if (current === extendedImages.length - 1) {
-      setCurrent(0);
-    }
-    else {setCurrent(current + 1)};
+
+    setCurrent((prev)=> (prev === extendedImages.length -1 ? 1 : prev + 1 ) )
+    // if (current === extendedImages.length - 1) {
+    //   setCurrent(0);
+    // }
+    // else {setCurrent(current + 1)};
   };
 
   return (
@@ -38,8 +41,7 @@ const Carousel = ({ images }) => {
         className="flex transition ease-out duration-400"
         style={{
           transform: `translateX(-${current * 100}%)`,
-          transition:
-            current === images.length ? "none" : "transform 0.4s ease-out",
+          transition: current === extendedImages.length -1 || current === extendedImages[1]  ? "none" : "transform 0.4s ease-out",
         }}
       >
         {extendedImages.map((data, index) => (
@@ -63,7 +65,7 @@ const Carousel = ({ images }) => {
         </button>
       </div>
       <div className="absolute flex justify-center w-full gap-4 bottom-0 py-4">
-        {images.map((item, i) => (
+        {extendedImages.map((item, i) => (
           <div
             key={i}
             onClick={() => setCurrent(i)}
