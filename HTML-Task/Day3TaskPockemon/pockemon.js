@@ -37,18 +37,18 @@ loadBtn.addEventListener("click", () => {
   limit = limit + 20;
   FetchPockemon();
 });
-
+let filteredData;
 select.addEventListener("change", (e) => {
 
   const selectedValue = e.target.value;
-    function checkType(data) {
-  if (selectedValue === "all") {
-    return data; 
-  } else {
+  function checkType(data) {
+    if (selectedValue === "all") {
+      return data;
+    } else {
       return data.types[0].type.name === selectedValue;
     }
   }
-  const filteredData = fetchedData.filter(checkType);
+  filteredData = fetchedData.filter(checkType);
 
   DisplayPockemon(filteredData);
 });
@@ -60,9 +60,9 @@ searchBox.addEventListener("input", (e) => {
     return data.name.toLowerCase().includes(searchValue);
   }
 
-  const filteredData = fetchedData.filter(searchByName);
+  const filteredNewData = filteredData.filter(searchByName);
 
-  DisplayPockemon(filteredData);
+  DisplayPockemon(filteredNewData);
 });
 
 
@@ -97,7 +97,7 @@ function DisplayPockemon(data) {
     pockeWeight.innerText = `Weight: ${item.weight}`;
 
     flipCardFront.append(pockeImage, pockeName, pockeType);
-    flipCardBack.append( pockeHeight, pockeWeight);
+    flipCardBack.append(pockeHeight, pockeWeight);
 
     flipCardInner.append(flipCardFront, flipCardBack);
     flipCard.appendChild(flipCardInner);

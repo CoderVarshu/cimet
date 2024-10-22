@@ -1,0 +1,49 @@
+function createCounterPromise(maxCount = 3, timeoutMs = 5000) {
+    let canceled = false;
+    let timerId;
+    
+    const promise = new Promise((resolve, reject) => {
+        // Set a timeout to reject the promise
+        const timeoutId = setTimeout(() => {
+            reject(new Error("Operation timed out"));
+        }, timeoutMs);
+        
+        // Start counting using setInterval
+        let count = 1;
+        timerId = setInterval(() => {
+            if (canceled) {
+                clearTimeout(timeoutId);
+                clearInterval(timerId);
+                console.log(`Operation canceled after ${timeoutMs / 1000} seconds`);
+                return; // Exit if canceled
+            }
+            console.log(`Counter ${count}`);
+            if (count === maxCount) {
+                clearTimeout(timeoutId);
+                clearInterval(timerId);
+                resolve(`Done! Counter reached ${maxCount}`);
+            }
+            count++;
+        }, 1000); // Print every second
+    });
+
+    const cancel = () => {
+        canceled = true; // Set canceled flag
+    };
+
+    return { promise, cancel };
+}
+
+// Usage
+const { promise, cancel } = createCounterPromise(10, 15000);
+
+promise
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error("Error:", error.message);
+    });
+
+// Cancel after 2 seconds
+setTimeout(cancel, 2000); // This should cancel the operation after 2 seconds
